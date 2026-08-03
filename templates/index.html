@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Todo Datastar Gero</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Assertive Abstract">
+  <!-- Cargamos Datastar desde CDN -->
+  <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.2/bundles/datastar.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
+
+</head>
+<style>
+
+</style>
+
+<body>
+  <header>
+    <h1 id="title-top-1">Todo - DATASTAR </h1>
+  </header>
+  <div>
+    A To-Do App made with Python and Datastar
+  </div>
+  <main>
+    <div style="display: flex;">
+      <div>
+        <button data-on:click="@post('/add-task')" class="btn">Add Task</button>
+        <input type="text" data-bind:new_task>
+      </div>
+      <div>
+        <button class="btn">Delete all tasks</button>
+
+      </div>
+
+    </div>
+
+    <div>
+      {% for task in tasks %}
+      <li>{{ task }}</li>
+      {% endfor %}
+    </div>
+
+  </main>
+
+
+  <script src="/static/app.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  -->
