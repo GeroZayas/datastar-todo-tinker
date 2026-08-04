@@ -8,4 +8,4 @@ class Task:
 	completed: bool
 
 tasks = ["Clean", "Dance"]
-foo = "foo"
+

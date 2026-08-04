@@ -27,7 +27,7 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 @app.get("/home")
 def home(request: Request):
-    context = {"tasks": data.tasks, "foo": data.foo}
+    context = {"tasks": data.tasks}
     return templates.TemplateResponse(
         request=request, name="index.html", context=context
     )
@@ -44,3 +44,14 @@ async def create_task(request: Request):
     return templates.TemplateResponse(
         request=request, name="index.html", context=context
     )
+
+
+
+@app.post("/delete-all-tasks")
+async def delete_all_tasks(request: Request):
+    data.tasks.clear()
+    context = {"tasks": data.tasks, "status": "all tasks deleted"}
+    return templates.TemplateResponse(
+        request=request, name="index.html", context=context
+    )
+
