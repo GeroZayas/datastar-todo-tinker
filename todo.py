@@ -33,21 +33,6 @@ def home(request: Request):
         request=request, name="index.html", context=context
     )
 
-
-# @app.post("/add-task")
-# async def create_task(request: Request):
-#     signals = await read_signals(request)
-#     try:
-#         title = signals["new_task"]
-#         new_task = data.create_task_obj(title)
-#         data.tasks.append(new_task)
-#     except Exception as e:
-#         print("EXCEPTION:", e)
-#     context = {"tasks": data.tasks}
-#     return templates.TemplateResponse(
-#         request=request, name="index.html", context=context
-#     )
-
 task_list_html = """
 
   <div 
@@ -84,7 +69,7 @@ async def create_task(request: Request):
     
     whole_element_html += """</div>"""
 
-    print(whole_element_html)
+    # print(whole_element_html)
 
     async def _():
         yield SSE.patch_elements(whole_element_html)
@@ -92,15 +77,16 @@ async def create_task(request: Request):
 
     return _()
 
+delete_tasks_html = """<div id="task-list-2" class="task-list"></div>"""
 
 @app.post("/delete-all-tasks")
+@datastar_response
 async def delete_all_tasks(request: Request):
     data.tasks.clear()
-    context = {"tasks": data.tasks, "status": "all tasks deleted"}
-    return templates.TemplateResponse(
-        request=request, name="index.html", context=context
-    )
-
+    async def _():
+        yield SSE.patch_elements(delete_tasks_html)
+    return _()
+    
 
 @app.post("/mark-completed")
 async def mark_completed(request: Request):

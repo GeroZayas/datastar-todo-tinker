@@ -31,7 +31,7 @@
 
           <input style="border-color: var(--watermelon);" id="add-task-input" type="text" value="" data-bind:new_task>
 
-          <button data-on:click="@post('/add-task'); " class="btn">Add Task</button>
+          <button data-on:click="$new_task.length != 0 && $new_task != ' ' ? @post('/add-task') : alert('Add correct task name'); " class="btn">Add Task</button>
 
           <!-- DELETE ALL TASKS -->
 

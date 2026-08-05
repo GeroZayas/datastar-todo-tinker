@@ -9,7 +9,7 @@ class Task:
 	completed: bool
 
 example_task = Task(1, "Clean", "", False)
-tasks = [example_task, ]
+tasks = []
 
 def create_task_obj(name, desc = "") -> Task:
 	"""Returns a Task obj"""
