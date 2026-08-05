@@ -13,7 +13,11 @@ tasks = [example_task, ]
 
 def create_task_obj(name, desc = "") -> Task:
 	"""Returns a Task obj"""
-	id = uuid4()
+	# id = uuid4()
+	if not len(tasks):
+		id = 1
+	else:
+		id = (1 + tasks[-1].id)
 	if desc == "":
 		desc = "No description"
 	completed = False

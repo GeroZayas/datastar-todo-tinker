@@ -15,6 +15,7 @@ from fastapi.responses import (
 )
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from rich import print
 
 import data
 
@@ -33,19 +34,64 @@ def home(request: Request):
     )
 
 
+# @app.post("/add-task")
+# async def create_task(request: Request):
+#     signals = await read_signals(request)
+#     try:
+#         title = signals["new_task"]
+#         new_task = data.create_task_obj(title)
+#         data.tasks.append(new_task)
+#     except Exception as e:
+#         print("EXCEPTION:", e)
+#     context = {"tasks": data.tasks}
+#     return templates.TemplateResponse(
+#         request=request, name="index.html", context=context
+#     )
+
+task_list_html = """
+
+  <div 
+    class="task-element" 
+    id={task_id} 
+    data-on:click="$clickedTask=el.id; 
+        @post('/mark-completed')">{task_name} ->
+        <span>{task_completed}</span>
+  </div>
+  <br>
+"""
+
+
 @app.post("/add-task")
+@datastar_response
 async def create_task(request: Request):
     signals = await read_signals(request)
-    try:
-        title = signals["new_task"]
-        new_task = data.create_task_obj(title)
-        data.tasks.append(new_task)
-    except Exception as e:
-        print("EXCEPTION:", e)
-    context = {"tasks": data.tasks}
-    return templates.TemplateResponse(
-        request=request, name="index.html", context=context
-    )
+    print(signals)
+    title = signals["new_task"]
+    new_task = data.create_task_obj(title)
+    data.tasks.append(new_task)
+
+    print(data.tasks)
+
+    whole_element_html = """<div id="task-list-2" class="task-list">"""
+
+    for t in data.tasks:
+        element_to_patch = task_list_html.format(
+            task_id=t.id,
+            task_name=t.name,
+            task_completed=t.completed,
+        )
+        whole_element_html += element_to_patch
+    
+    whole_element_html += """</div>"""
+
+    print(whole_element_html)
+
+    async def _():
+        yield SSE.patch_elements(whole_element_html)
+        yield SSE.patch_signals({"new_task":""})
+
+    return _()
+
 
 @app.post("/delete-all-tasks")
 async def delete_all_tasks(request: Request):
@@ -55,12 +101,10 @@ async def delete_all_tasks(request: Request):
         request=request, name="index.html", context=context
     )
 
+
 @app.post("/mark-completed")
 async def mark_completed(request: Request):
     signals = await read_signals(request)
     print(signals)
     clicked_task = signals["clickedTask"]
     print("clicked_task", clicked_task)
-
-
-

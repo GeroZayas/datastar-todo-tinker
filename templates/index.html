@@ -22,33 +22,40 @@
     <h3 id="subtitle-top-1">A To-Do App made with Python and Datastar</h3>
   </header>
   <main>
-  </div>
-  <main>
-    <div style="display: grid;">
+    </div>
+    <main>
+      <div style="display: grid;">
 
-      <div class="add-task-area">
-        <!-- CREATE TASK -->
+        <div class="add-task-area">
+          <!-- CREATE TASK -->
 
-        <input style="border-color: var(--watermelon);" id="add-task-input" type="text" data-bind:new_task>
+          <input style="border-color: var(--watermelon);" id="add-task-input" type="text" value="" data-bind:new_task>
 
-        <button data-on:click="@post('/add-task')" class="btn">Add Task</button>
+          <button data-on:click="@post('/add-task'); " class="btn">Add Task</button>
 
-        <!-- DELETE ALL TASKS -->
+          <!-- DELETE ALL TASKS -->
 
-        <button data-on:click="@post('/delete-all-tasks')" class="btn">Delete all tasks</button>
-      </div>
+          <button data-on:click="@post('/delete-all-tasks')" class="btn">Delete all tasks</button>
+        </div>
 
     </main>
 
     <!-- LIST OF TASKS -->
 
-    <div class="task-list">
+<!--     <div class="task-list">
       {% for task in tasks %}
-      <div class="task-element" id={{task.id}} data-on:click="$clickedTask=el.id; @post('/mark-completed')">{{ task.name }} ->
-        <span >{{task.completed}}</span></div>
-        <br>
-      {% endfor %}
+      <div class="task-element" id={{task.id}} data-on:click="$clickedTask=el.id; @post('/mark-completed')">{{ task.name
+        }} ->
+        <span>{{task.completed}}</span>
       </div>
+      <br>
+      {% endfor %}
+    </div> -->
+
+    <!-- LIST OF TASKS -->
+
+    <div id="task-list-2" class="task-list">
+    </div>
 
   </main>
 
