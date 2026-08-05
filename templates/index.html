@@ -19,33 +19,36 @@
 <body>
   <header>
     <h1 id="title-top-1">Todo - DATASTAR </h1>
+    <h3 id="subtitle-top-1">A To-Do App made with Python and Datastar</h3>
   </header>
-  <div>
-    A To-Do App made with Python and Datastar
+  <main>
   </div>
   <main>
-    <div style="display: flex;">
-      
-      <!-- CREATE TASK -->
-      <div>
-        <button data-on:click="@post('/add-task')" class="btn">Add Task</button>
-        <input type="text" data-bind:new_task>
-      </div>
+    <div style="display: grid;">
 
-      <!-- DELETE ALL TASKS -->
-      <div>
+      <div class="add-task-area">
+        <!-- CREATE TASK -->
+
+        <input style="border-color: var(--watermelon);" id="add-task-input" type="text" data-bind:new_task>
+
+        <button data-on:click="@post('/add-task')" class="btn">Add Task</button>
+
+        <!-- DELETE ALL TASKS -->
+
         <button data-on:click="@post('/delete-all-tasks')" class="btn">Delete all tasks</button>
       </div>
 
-    </div>
+    </main>
 
     <!-- LIST OF TASKS -->
 
-    <div>
+    <div class="task-list">
       {% for task in tasks %}
-      <li>{{ task }}</li>
+      <div class="task-element" id={{task.id}} data-on:click="$clickedTask=el.id; @post('/mark-completed')">{{ task.name }} ->
+        <span >{{task.completed}}</span></div>
+        <br>
       {% endfor %}
-    </div>
+      </div>
 
   </main>
 

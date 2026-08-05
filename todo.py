@@ -37,15 +37,15 @@ def home(request: Request):
 async def create_task(request: Request):
     signals = await read_signals(request)
     try:
-        data.tasks.append(signals["new_task"])
+        title = signals["new_task"]
+        new_task = data.create_task_obj(title)
+        data.tasks.append(new_task)
     except Exception as e:
         print("EXCEPTION:", e)
     context = {"tasks": data.tasks}
     return templates.TemplateResponse(
         request=request, name="index.html", context=context
     )
-
-
 
 @app.post("/delete-all-tasks")
 async def delete_all_tasks(request: Request):
@@ -54,4 +54,13 @@ async def delete_all_tasks(request: Request):
     return templates.TemplateResponse(
         request=request, name="index.html", context=context
     )
+
+@app.post("/mark-completed")
+async def mark_completed(request: Request):
+    signals = await read_signals(request)
+    print(signals)
+    clicked_task = signals["clickedTask"]
+    print("clicked_task", clicked_task)
+
+
 
