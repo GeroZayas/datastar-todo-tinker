@@ -49,18 +49,26 @@
     </div>
 
 
-<!--     <div id="task-list-3" class="task-list">
+    <!-- TESTING AND DEVLOPMENT DIV -->
+    <!-- -------------------------- -->
 
-      <div style="display: flex;" class="task-element" id={task_id} data-on:click="$clickedTask=el.id; 
+    <div id="task-list-3" class="task-list">
+
+      <div class="task-element" id={task_id} data-on:click="$clickedTask=el.id; 
         @post('/mark-completed')">
-        
+
         <div class="check-btn"></div>
 
         {task_name} ->
         <span>{task_completed}</span>
+        <div class="edit-delete-btns">
+          <button class="btn">Edit</button>
+          <button class="btn">Delete</button>
+        </div>
       </div>
-    </div> -->
-    
+    </div>
+    <!-- -------------------------- -->
+
     <br>
   </main>
 

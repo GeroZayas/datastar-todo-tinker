@@ -17,7 +17,7 @@ body{
 	padding-right: 0.5rem;
 	width: 35rem;
 
-   box-sizing: border-box;;
+   box-sizing: border-box;
 
 
 
@@ -61,12 +61,20 @@ div {
 }
 
 .task-element {
-	padding: 0.5rem;
+	padding: 0.2rem;
 	background-color: white;
 	border-style: solid;
 	border-radius: 2px;
 	border-width: 1px;
 	border-color: var(--royal-gold);
+	display: flex;
+	align-items: center;
+}
+
+.edit-delete-btns {
+	display: flex;
+	margin-left: auto;
+	gap: 0.5rem;
 }
 
 li::marker {
@@ -81,6 +89,9 @@ li::marker {
 	color: var(--prussian-blue);
 	background-color: var(--royal-gold);
 	transition: 0.1s;
+	border-top: none;
+	border-left: none;
+	/* border-right: none; */
 }
 
 .btn:hover {

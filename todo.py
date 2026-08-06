@@ -1,8 +1,8 @@
-""" 
+"""
 To-do:
 a) when click on task - open subtasks
-b) add button to edit and delete 
-c) 
+b) add button to edit and delete
+c)
 
 """
 
@@ -41,6 +41,7 @@ def home(request: Request):
         request=request, name="index.html", context=context
     )
 
+
 task_list_html = """
 
   <div 
@@ -52,6 +53,10 @@ task_list_html = """
         <div class="check-btn"></div>
         {task_name} ->
         <span>{task_completed}</span>
+         <div class="edit-delete-btns">
+          <button class="btn">Edit</button>
+          <button class="btn">Delete</button>
+        </div>
   </div>
   <br>
 """
@@ -77,27 +82,31 @@ async def create_task(request: Request):
             task_completed=t.completed,
         )
         whole_element_html += element_to_patch
-    
+
     whole_element_html += """</div>"""
 
     # print(whole_element_html)
 
     async def _():
         yield SSE.patch_elements(whole_element_html)
-        yield SSE.patch_signals({"new_task":""})
+        yield SSE.patch_signals({"new_task": ""})
 
     return _()
 
+
 delete_tasks_html = """<div id="task-list-2" class="task-list"></div>"""
+
 
 @app.post("/delete-all-tasks")
 @datastar_response
 async def delete_all_tasks(request: Request):
     data.tasks.clear()
+
     async def _():
         yield SSE.patch_elements(delete_tasks_html)
+
     return _()
-    
+
 
 @app.post("/mark-completed")
 async def mark_completed(request: Request):
