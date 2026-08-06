@@ -31,7 +31,9 @@
 
           <input style="border-color: var(--watermelon);" id="add-task-input" type="text" value="" data-bind:new_task>
 
-          <button data-on:click="$new_task.length != 0 && $new_task != ' ' ? @post('/add-task') : alert('Add correct task name'); " class="btn">Add Task</button>
+          <button
+            data-on:click="$new_task.length != 0 && $new_task != ' ' ? @post('/add-task') : alert('Add correct task name'); "
+            class="btn">Add Task</button>
 
           <!-- DELETE ALL TASKS -->
 
@@ -42,21 +44,24 @@
 
     <!-- LIST OF TASKS -->
 
-<!--     <div class="task-list">
-      {% for task in tasks %}
-      <div class="task-element" id={{task.id}} data-on:click="$clickedTask=el.id; @post('/mark-completed')">{{ task.name
-        }} ->
-        <span>{{task.completed}}</span>
-      </div>
-      <br>
-      {% endfor %}
-    </div> -->
-
-    <!-- LIST OF TASKS -->
 
     <div id="task-list-2" class="task-list">
     </div>
 
+
+<!--     <div id="task-list-3" class="task-list">
+
+      <div style="display: flex;" class="task-element" id={task_id} data-on:click="$clickedTask=el.id; 
+        @post('/mark-completed')">
+        
+        <div class="check-btn"></div>
+
+        {task_name} ->
+        <span>{task_completed}</span>
+      </div>
+    </div> -->
+    
+    <br>
   </main>
 
 

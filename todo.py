@@ -1,3 +1,11 @@
+""" 
+To-do:
+a) when click on task - open subtasks
+b) add button to edit and delete 
+c) 
+
+"""
+
 import asyncio
 import json
 
@@ -36,10 +44,13 @@ def home(request: Request):
 task_list_html = """
 
   <div 
+    style="display: flex;"
     class="task-element" 
     id={task_id} 
     data-on:click="$clickedTask=el.id; 
-        @post('/mark-completed')">{task_name} ->
+        @post('/mark-completed')">
+        <div class="check-btn"></div>
+        {task_name} ->
         <span>{task_completed}</span>
   </div>
   <br>

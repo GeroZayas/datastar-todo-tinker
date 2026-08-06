@@ -91,3 +91,31 @@ li::marker {
 	background-color: var(--tea-green);
 	transform: scale(0.96);
 }
+
+.check-btn {
+	width: 20px;
+	height: 20px;
+	margin-right: 0.5rem;
+	background-image: url("/static/images/btn-check/check-1.png");
+	background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+	border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.check-btn:hover {
+	background-image: url("/static/images/btn-check/check-1-hover.png");
+
+}
+
+.check-btn:active {
+	background-image: url("/static/images/btn-check/check-1-active.png");
+
+}
+
+.check-canvas {
+	border-width: 1px;
+}
+
+
