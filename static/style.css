@@ -6,12 +6,13 @@
     --charcoal-blue: #465362;
     --soft-grey: #F2F2F2;
     --soft-yelow: #F5F0DA;
+	font-family: "Iosevka", sans-serif;
+
 }
 
 body{
 	margin-left: 5rem;
 	margin-right: 5rem;
-	font-family: "Iosevka", sans-serif;
 
 	padding-left: 0.5rem;
 	padding-right: 0.5rem;
@@ -85,13 +86,15 @@ li::marker {
  }
 
 .btn {
-	padding: 0.5rem;
+	padding: 0.2rem;
 	color: var(--prussian-blue);
 	background-color: var(--royal-gold);
 	transition: 0.1s;
 	border-top: none;
 	border-left: none;
 	/* border-right: none; */
+	font-family: "Iosevka", sans-serif;
+	
 }
 
 .btn:hover {
@@ -101,6 +104,22 @@ li::marker {
 .btn:active {
 	background-color: var(--tea-green);
 	transform: scale(0.96);
+
+}
+
+.add-task {
+	color: var(--charcoal-blue);
+}
+
+.delete-tasks {
+	color: var(--watermelon);
+}
+
+.add-task, .delete-tasks {
+	padding: 0.6rem;
+	font-family: "Iosevka", sans-serif;
+
+
 }
 
 .check-btn {

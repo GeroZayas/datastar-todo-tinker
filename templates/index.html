@@ -33,11 +33,11 @@
 
           <button
             data-on:click="$new_task.length != 0 && $new_task != ' ' ? @post('/add-task') : alert('Add correct task name'); "
-            class="btn">Add Task</button>
+            class="btn add-task">Add Task</button>
 
           <!-- DELETE ALL TASKS -->
 
-          <button data-on:click="@post('/delete-all-tasks')" class="btn">Delete all tasks</button>
+          <button data-on:click="@post('/delete-all-tasks')" class="btn delete-tasks">Delete all tasks</button>
         </div>
 
     </main>
