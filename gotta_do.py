@@ -52,6 +52,10 @@ def home(request: Request):
     )
 
 
+def draw_list_tasks(tasks: list):
+    pass
+
+
 task_list_html = """
 
   <div 
@@ -135,7 +139,7 @@ async def delete_task(request: Request):
     signals = await read_signals(request)
     ic(signals)
     whole_element_html = """<div id="task-list-2" class="task-list">"""
-    
+
     data.tasks = [
         task for task in data.tasks if task.id != int(signals["selectedTask"])
     ]
@@ -164,6 +168,31 @@ async def delete_task(request: Request):
 
 
 @app.post("/mark-completed")
+@datastar_response
 async def mark_completed(request: Request):
     signals = await read_signals(request)
-    print(signals)
+    ic(signals)
+    whole_element_html = """<div id="task-list-2" class="task-list">"""
+    
+    sel = int(signals["selectedTask"])
+    for task in data.tasks:
+        if task.id == sel:
+            task.completed = not task.completed
+    
+    for t in data.tasks:
+        element_to_patch = task_list_html.format(
+            task_id=t.id,
+            task_name=t.name,
+            task_completed=t.completed,
+        )
+        whole_element_html += element_to_patch
+
+    whole_element_html += """</div>"""
+
+    # print(whole_element_html)
+
+    async def _():
+        yield SSE.patch_elements(whole_element_html)
+        yield SSE.patch_signals({"new_task": ""})
+
+    return _()
