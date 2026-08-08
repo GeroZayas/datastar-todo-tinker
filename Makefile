@@ -1,5 +1,5 @@
 run:
-	uvicorn todo:app --reload
+	uvicorn gotta_do:app --reload
 
 git:
 	git add -A && \

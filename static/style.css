@@ -7,12 +7,17 @@
     --soft-grey: #F2F2F2;
     --soft-yelow: #F5F0DA;
 	font-family: "Iosevka", sans-serif;
+	background-color: white;
 
 }
 
+/* debug { display: none; }          /* hide in production */ */
+debug[data-visible] { display: block; }
+
 body{
-	margin-left: 5rem;
-	margin-right: 5rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10rem;
 
 	padding-left: 0.5rem;
 	padding-right: 0.5rem;
@@ -20,8 +25,11 @@ body{
 
    box-sizing: border-box;
 
+}
 
-
+.title-top {
+	background-color: var(--soft-yelow);
+	border-radius: 2px;
 }
 
 header {
@@ -50,6 +58,8 @@ div {
 	margin-top: 0.5rem;
 	padding: 0.5rem;
 	background-color: var(--soft-grey);
+	display: grid;
+	gap: 0.5rem;
 }
 
 #add-task-input{
@@ -94,7 +104,7 @@ li::marker {
 	border-left: none;
 	/* border-right: none; */
 	font-family: "Iosevka", sans-serif;
-	
+
 }
 
 .btn:hover {

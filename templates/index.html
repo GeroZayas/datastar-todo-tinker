@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Todo Datastar Gero</title>
+  <title>Gotta Do</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Assertive Abstract">
+  <meta name="description" content="Gotta Do">
   <!-- Cargamos Datastar desde CDN -->
   <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.2/bundles/datastar.js"></script>
   <link rel="stylesheet" href="/static/style.css">
@@ -17,9 +17,17 @@
 </style>
 
 <body>
+  <debug>
+    <h2>DEBUG:</h2>
+    <div data-json-signals style="background-color: lightcyan;"></div>
+  </debug>
+
+  <br>
+  <br>
+
   <header>
-    <h1 id="title-top-1">Todo - DATASTAR </h1>
-    <h3 id="subtitle-top-1">A To-Do App made with Python and Datastar</h3>
+    <h1 style=" color: var(--watermelon)" class="title-top" id="title-top-1">Gotta Do</h1>
+    <h4 id="subtitle-top-1">A To-Do App made with Python FastAPI and Datastar</h4>
   </header>
   <main>
     </div>
@@ -63,13 +71,14 @@
         <span>{task_completed}</span>
         <div class="edit-delete-btns">
           <button class="btn">Edit</button>
-          <button class="btn">Delete</button>
+          <button data-on:click="@post('/delete-task')" class="btn">Delete</button>
         </div>
       </div>
     </div>
     <!-- -------------------------- -->
 
     <br>
+
   </main>
 
 
