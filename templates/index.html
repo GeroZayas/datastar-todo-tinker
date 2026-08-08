@@ -16,7 +16,7 @@
 
 </style>
 
-<body>
+<body data-init="@get()">
   <debug>
     <h2>DEBUG:</h2>
     <div data-json-signals style="background-color: lightcyan;"></div>
@@ -27,7 +27,8 @@
 
   <header>
     <h1 style=" color: var(--watermelon)" class="title-top" id="title-top-1">Gotta Do</h1>
-    <h4 id="subtitle-top-1">A To-Do App made with Python FastAPI and Datastar</h4>
+    <h4 id="subtitle-top-1">A To-Do App made with <a target="_blank" href="https://fastapi.tiangolo.com/">FastAPI</a>
+      and <a target="_blank" href="https://data-star.dev/">Datastar</a></h4>
   </header>
   <main>
     </div>
@@ -60,9 +61,9 @@
     <!-- TESTING AND DEVLOPMENT DIV -->
     <!-- -------------------------- -->
 
-    <div id="task-list-3" class="task-list">
+    <!-- <div id="task-list-3" class="task-list">
 
-      <div class="task-element" id={task_id} data-on:click="$clickedTask=el.id; 
+      <div class="task-element " id={task_id} data-on:click="$clickedTask=el.id; 
         @post('/mark-completed')">
 
         <div class="check-btn"></div>
@@ -74,7 +75,7 @@
           <button data-on:click="@post('/delete-task')" class="btn">Delete</button>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- -------------------------- -->
 
     <br>

@@ -52,25 +52,23 @@ def home(request: Request):
 
 
 def draw_list_tasks(tasks: list):
-    """Draws a div element with all the tasks div elements 
-    """
+    """Draws a div element with all the tasks div elements"""
     head = """<div id="task-list-2" class="task-list">"""
 
     task_list_html = """
 
       <div 
         style="display: flex;"
-        class="task-element"
+        data-class="{{'task-element': true, taskCompleted: '{task_completed}' == 'True'}}"
         id={task_id}>
-            <div data-on:click="$selectedTask={task_id}; @post('/mark-completed');" class="check-btn"></div>
-            {task_name} ->
-            <span>{task_completed}</span>
-             <div class="edit-delete-btns">
-              <button class="btn">Edit</button>
-              <button data-on:click=
+        <div data-on:click="$selectedTask={task_id}; @post('/mark-completed');" class="check-btn"></div>
+            {task_name}
+            <div class="edit-delete-btns">
+            <button class="btn">Edit</button>
+            <button data-on:click=
                 "$selectedTask={task_id}; @post('/delete-task');" 
-              class="btn">Delete</button>
-            </div>
+            class="btn">Delete</button>
+        </div>
       </div>
     """
 
