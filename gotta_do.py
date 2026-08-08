@@ -24,11 +24,10 @@ from fastapi.responses import (
 )
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from rich import print
 from icecream import ic
+from rich import print
 
 import data
-
 
 # Useful
 # -------
@@ -53,26 +52,43 @@ def home(request: Request):
 
 
 def draw_list_tasks(tasks: list):
-    pass
+    """Draws a div element with all the tasks div elements 
+    """
+    head = """<div id="task-list-2" class="task-list">"""
 
+    task_list_html = """
 
-task_list_html = """
+      <div 
+        style="display: flex;"
+        class="task-element"
+        id={task_id}>
+            <div data-on:click="$selectedTask={task_id}; @post('/mark-completed');" class="check-btn"></div>
+            {task_name} ->
+            <span>{task_completed}</span>
+             <div class="edit-delete-btns">
+              <button class="btn">Edit</button>
+              <button data-on:click=
+                "$selectedTask={task_id}; @post('/delete-task');" 
+              class="btn">Delete</button>
+            </div>
+      </div>
+    """
 
-  <div 
-    style="display: flex;"
-    class="task-element"
-    id={task_id}>
-        <div data-on:click="$selectedTask={task_id}; @post('/mark-completed');" class="check-btn"></div>
-        {task_name} ->
-        <span>{task_completed}</span>
-         <div class="edit-delete-btns">
-          <button class="btn">Edit</button>
-          <button data-on:click=
-            "$selectedTask={task_id}; @post('/delete-task');" 
-          class="btn">Delete</button>
-        </div>
-  </div>
-"""
+    whole_element_html = head
+
+    foot = """</div>"""
+
+    for t in tasks:
+        element_to_patch = task_list_html.format(
+            task_id=t.id,
+            task_name=t.name,
+            task_completed=t.completed,
+        )
+        whole_element_html += element_to_patch
+
+    whole_element_html += foot
+
+    return whole_element_html
 
 
 # ADD ONE TASK
@@ -88,21 +104,7 @@ async def create_task(request: Request):
     new_task = data.create_task_obj(title)
     data.tasks.append(new_task)
 
-    print(data.tasks)
-
-    whole_element_html = """<div id="task-list-2" class="task-list">"""
-
-    for t in data.tasks:
-        element_to_patch = task_list_html.format(
-            task_id=t.id,
-            task_name=t.name,
-            task_completed=t.completed,
-        )
-        whole_element_html += element_to_patch
-
-    whole_element_html += """</div>"""
-
-    # print(whole_element_html)
+    whole_element_html = draw_list_tasks(data.tasks)
 
     async def _():
         yield SSE.patch_elements(whole_element_html)
@@ -138,23 +140,13 @@ async def delete_all_tasks(request: Request):
 async def delete_task(request: Request):
     signals = await read_signals(request)
     ic(signals)
-    whole_element_html = """<div id="task-list-2" class="task-list">"""
+    whole_element_html = ...
 
     data.tasks = [
         task for task in data.tasks if task.id != int(signals["selectedTask"])
     ]
 
-    for t in data.tasks:
-        element_to_patch = task_list_html.format(
-            task_id=t.id,
-            task_name=t.name,
-            task_completed=t.completed,
-        )
-        whole_element_html += element_to_patch
-
-    whole_element_html += """</div>"""
-
-    # print(whole_element_html)
+    whole_element_html = draw_list_tasks(data.tasks)
 
     async def _():
         yield SSE.patch_elements(whole_element_html)
@@ -173,23 +165,13 @@ async def mark_completed(request: Request):
     signals = await read_signals(request)
     ic(signals)
     whole_element_html = """<div id="task-list-2" class="task-list">"""
-    
+
     sel = int(signals["selectedTask"])
     for task in data.tasks:
         if task.id == sel:
             task.completed = not task.completed
-    
-    for t in data.tasks:
-        element_to_patch = task_list_html.format(
-            task_id=t.id,
-            task_name=t.name,
-            task_completed=t.completed,
-        )
-        whole_element_html += element_to_patch
 
-    whole_element_html += """</div>"""
-
-    # print(whole_element_html)
+    whole_element_html = draw_list_tasks(data.tasks)
 
     async def _():
         yield SSE.patch_elements(whole_element_html)
