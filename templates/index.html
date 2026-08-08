@@ -9,6 +9,7 @@
   <meta name="description" content="Gotta Do">
   <!-- Cargamos Datastar desde CDN -->
   <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.2/bundles/datastar.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/static/style.css">
 
 </head>
@@ -16,7 +17,7 @@
 
 </style>
 
-<body data-init="@get()">
+<body>
   <debug>
     <h2>DEBUG:</h2>
     <div data-json-signals style="background-color: lightcyan;"></div>
@@ -47,6 +48,10 @@
           <!-- DELETE ALL TASKS -->
 
           <button data-on:click="@post('/delete-all-tasks')" class="btn delete-tasks">Delete all tasks</button>
+
+          <button data-on:click="@get('/refresh')" class="tooltip btn refresh-tasks"><i class="fa fa-refresh"
+              aria-hidden="true"></i><span class="tooltiptext">Refresh to load changes from other tabs</span></button>
+
         </div>
 
     </main>

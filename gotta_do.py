@@ -110,6 +110,17 @@ async def create_task(request: Request):
 
     return _()
 
+@app.get("/refresh")
+@datastar_response
+async def refresh(request: Request):
+
+    whole_element_html = draw_list_tasks(data.tasks)
+
+    async def _():
+        yield SSE.patch_elements(whole_element_html)
+
+    return _()
+
 
 delete_tasks_html = """<div id="task-list-2" class="task-list"></div>"""
 

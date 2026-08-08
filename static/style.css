@@ -21,7 +21,7 @@ body{
 
 	padding-left: 0.5rem;
 	padding-right: 0.5rem;
-	width: 35rem;
+	width: 36rem;
 
    box-sizing: border-box;
 
@@ -104,6 +104,7 @@ li::marker {
 	border-left: none;
 	/* border-right: none; */
 	font-family: "Iosevka", sans-serif;
+  cursor: pointer;
 
 }
 
@@ -125,7 +126,7 @@ li::marker {
 	color: var(--watermelon);
 }
 
-.add-task, .delete-tasks {
+.add-task, .delete-tasks .refresh-tasks{
 	padding: 0.6rem;
 	font-family: "Iosevka", sans-serif;
 
@@ -163,4 +164,28 @@ li::marker {
 	background-color: var(--tea-green);
 }
 
+
+/* TOOLTIPS */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltiptext {
+	left: 150%;
+	bottom: 10%;
+  visibility: hidden;
+  width: 130px;
+  background-color: var(--prussian-blue);
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 
